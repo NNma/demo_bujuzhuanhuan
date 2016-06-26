@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="" />
+<meta name="copyright" content="" />
+<title></title>
+<style>
+*{margin: 0;padding: 0;}
+
+ul{
+	width:550px;
+	margin:0 auto;
+	position: relative;
+}
+
+li{
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin: 10px;
+	background: #ccc;
+	list-style: none;
+	opacity: 0;
+}
+</style>
+<script src="move.js"></script>
+<script>
+window.onload = function(){
+//	for(var i=0;i<lis.length;i++){
+//		(function(index){
+//			lis
+//		})(i)
+//	}
+	
+	var ul = document.getElementById('ul1');
+	var lis = ul.children;
+	var aPos = [];
+	var btn1 = document.getElementById('btn1');
+	
+	//布局转换
+	
+	for(var i=0;i<lis.length;i++){
+		aPos[i] = {
+			top:lis[i].offsetTop,
+			left:lis[i].offsetLeft,
+			width:lis[i].offsetWidth,
+			height:lis[i].offsetHeight
+		}
+	}
+	
+	for(var i=0;i<lis.length;i++){
+		lis[i].style.left = aPos[0].left + 'px';
+		lis[i].style.top = aPos[0].top + 'px';
+		lis[i].style.position = 'absolute';
+		lis[i].style.margin = 0;
+		aPos[i].opacity = 1;
+	}
+	
+//	console.log(aPos)
+	open();
+	var num = lis.length-1;
+	function open(){
+		var timer = null;
+		timer = setInterval(function(){
+			move(lis[num],aPos[num],500,'easeOut');
+			num--;
+			if(num == -1){
+				clearInterval(timer);
+				num = 0;
+			}
+			
+		},100);
+	}
+	
+	
+	btn1.onclick = function(){
+		
+		var timer = null;
+		timer = setInterval(function(){
+//			move(lis[num],{
+//				left:aPos[2].left,
+//				top:aPos[2].top - 300,
+//				width:0,
+//				height:0,
+//				opacity:0
+//			},500,'easeOut',function(){
+//				//open();
+//				if(lis[lis.length-1].offsetTop == lis[0].offsetTop){
+//					alert(1);
+//				}
+//			});
+
+			(function(index){
+				move(lis[num],{
+					left:aPos[2].left,
+					top:aPos[2].top - 300,
+					width:0,
+					height:0,
+					opacity:0
+				},500,'easeOut',function(){
+					/*
+						将num值存入闭包，当某个li运动完之后才去使用
+					*/
+					//console.log(index)
+					if(index == lis.length-1){
+						open();
+					}
+				});
+			})(num);
+			num++;
+			if(num == lis.length){
+				clearInterval(timer);
+			}
+			//console.log(num);
+		},100);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
+</script>
+</head>
+
+<body>
+	<input type="button" value="收起来" id="btn1" />
+	<ul id="ul1">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+</html>
