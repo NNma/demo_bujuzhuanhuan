@@ -27,18 +27,11 @@ li{
 <script src="move.js"></script>
 <script>
 window.onload = function(){
-//	for(var i=0;i<lis.length;i++){
-//		(function(index){
-//			lis
-//		})(i)
-//	}
 	
 	var ul = document.getElementById('ul1');
 	var lis = ul.children;
 	var aPos = [];
 	var btn1 = document.getElementById('btn1');
-	
-	//布局转换
 	
 	for(var i=0;i<lis.length;i++){
 		aPos[i] = {
@@ -78,18 +71,6 @@ window.onload = function(){
 		
 		var timer = null;
 		timer = setInterval(function(){
-//			move(lis[num],{
-//				left:aPos[2].left,
-//				top:aPos[2].top - 300,
-//				width:0,
-//				height:0,
-//				opacity:0
-//			},500,'easeOut',function(){
-//				//open();
-//				if(lis[lis.length-1].offsetTop == lis[0].offsetTop){
-//					alert(1);
-//				}
-//			});
 
 			(function(index){
 				move(lis[num],{
@@ -99,9 +80,6 @@ window.onload = function(){
 					height:0,
 					opacity:0
 				},500,'easeOut',function(){
-					/*
-						将num值存入闭包，当某个li运动完之后才去使用
-					*/
 					//console.log(index)
 					if(index == lis.length-1){
 						open();
